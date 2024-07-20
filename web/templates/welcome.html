@@ -9,6 +9,19 @@
     {% include 'navbar.html' %}
     <div class="container-fluid">
         <h1>Bienvenido Cliente</h1>
+        <div class="row g-4 p-4">
+            {% for flan in flanes_privados %}
+            <div class="col">
+                <div class="card h-100 w-100">
+                    <img src="{{ flan.flan_image_url }}" class="card-img-top h-100 w-100" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ flan.flan_name }}</h5>
+                        <p class="card-text">{{ flan.flan_description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
     {% include 'footer.html' %}
 
