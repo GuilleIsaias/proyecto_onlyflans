@@ -1,11 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% include 'basehead.html' %}
 </head>
+
 <body>
-    <h1>HOLAS</h1>
+    {% include 'header.html' %}
+    {% include 'navbar.html' %}
+    <div class="container-fluid">
+        <h1>Indice</h1>
+        <div class="row g-4 p-4">
+            {% for flan in flanes_publicos %}
+            <div class="col">
+                <div class="card h-100 w-100">
+                    <img src="{{ flan.flan_image_url }}" class="card-img-top h-100 w-100" alt="hola">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ flan.flan_name }}</h5>
+                        <p class="card-text">{{ flan.flan_description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% include 'footer.html' %}
+
 </body>
+
 </html>
