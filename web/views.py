@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
+from django.views.generic import FormView
 from .models import Flan, ContactForm
-from .forms import Contact_Form
+from .forms import Contact_Form, Contactillo
 from django.http import HttpResponseRedirect
 
 
@@ -30,5 +31,28 @@ def contacto(request):
         form = Contact_Form()
 
     return render(request, 'contacto.html', {'form': form})
+
+class ContactView(FormView):
+    form_class = Contactillo
+    template_name = "contactomodel.html"
+
+    def get_success_url(self):
+        return reverse("contact")
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get("customer_email")
+        subject = form.cleaned_data.get("customer_name")
+        message = form.cleaned_data.get("message")
+
+        return super(ContactView, self).form_valid(form)
+    
+    def post(self,request):
+        form = Contactillo(request.POST)
+        form.save()
+
+        return redirect("/")
+
+
+
 
 
