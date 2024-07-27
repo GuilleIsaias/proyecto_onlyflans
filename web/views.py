@@ -1,8 +1,10 @@
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.views.generic import FormView
 from .models import Flan, ContactForm
 from .forms import Contact_Form, Contactillo
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 
 # Create your views here.
@@ -16,9 +18,20 @@ def about(request):
 def exito(request):
     return render(request, 'exito.html', {})
 
+@login_required
 def welcome(request):
     flanes_privados = Flan.objects.filter(flan_is_private=True)
     return render(request, 'welcome.html', {'flanes_privados': flanes_privados})
+
+@login_required
+def recipe_detail(request, id):
+    flan = get_object_or_404(Flan, flan_id=id)
+    return render(request, 'recipe_detail.html', {'flan': flan})
+
+@login_required
+def recipes(request):
+    flanes = Flan.objects.all()
+    return render(request, 'recipes.html', {'flanes':flanes})
 
 def contacto(request):
     if request.method == 'POST':

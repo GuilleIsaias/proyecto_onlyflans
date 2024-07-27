@@ -9,9 +9,12 @@ class Flan(models.Model):
     flan_image_url = models.URLField()
     flan_slug = models.SlugField()
     flan_is_private = models.BooleanField()
+    flan_recipe = models.TextField(default='recipe here')
 
 class ContactForm(models.Model):
     contact_form_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     customer_email = models.EmailField()
     customer_name = models.CharField(max_length=64)
     message = models.TextField()
+
+

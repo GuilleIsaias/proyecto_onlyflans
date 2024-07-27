@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    {% include 'basehead.html' %}
+</head>
+
+<body>
+    {% include 'header.html' %}
+    {% include 'navbar.html' %}
+    <div class="container-fluid">
+        <h1>Recetas</h1>
+    </div>
+    {% for flanes in flanes %}
+    <div class="row g-4 p-4">
+        <div class="col">
+            <div class="card" style="width: 18rem; text-align: center; align-items: center;">
+                <img src="{{ flanes.flan_image_url }}" class="card-img-top" style="width:100px;height:100px; "
+                    alt="hola">
+                <div class="card-body">
+                    <h5 class="card-title">{{ flanes.flan_name }}</h5>
+                    <p class="card-text">{{ flanes.flan_description }}</p>
+                    <a href="{% url 'recipe_detail' flanes.flan_id %}" class="btn btn-secondary">Receta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% include 'footer.html' %}
+</body>
+
+</html>

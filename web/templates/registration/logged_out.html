@@ -1,0 +1,18 @@
+<html>
+
+<head>
+{% include 'basehead.html' %}
+</head>
+
+<body>
+    {% include 'header.html' %}
+    {% include 'navbar.html' %}
+    {% block content %}
+<p>¡Sesión finalizada!</p>
+
+<a href="{% url 'login'%}">Haga clic aquí para iniciar sesión nuevamente.</a>
+{% endblock %}
+    {% include 'footer.html' %}
+</body>
+
+</html>
